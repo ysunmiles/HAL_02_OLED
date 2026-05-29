@@ -8,14 +8,15 @@
 /*引脚初始化（使用 HAL）*/
 void OLED_I2C_Init(void)
 {
-	__HAL_RCC_GPIOB_CLK_ENABLE();
+	// __HAL_RCC_GPIOB_CLK_ENABLE();
 
-	GPIO_InitTypeDef GPIO_InitStruct = {0};
-	GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
-	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-	HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	// GPIO_InitTypeDef GPIO_InitStruct = {0};
+	// GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9;
+	// GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+	// GPIO_InitStruct.Pull = GPIO_NOPULL;
+	// GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+	// HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+	// 此代码块功能为初始化GPIOB的8和9号引脚，此处使用CubeMX生成的代码进行引脚初始化，因此注释掉了手动初始化的代码
 
 	OLED_W_SCL(1);
 	OLED_W_SDA(1);
