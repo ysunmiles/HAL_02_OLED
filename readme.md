@@ -1,47 +1,50 @@
-# HAL_1_BlinkingLED
+# HAL_2_OLED
 
 ## 简介
-本项目为基于硬件抽象层（HAL）的单片机示例：LED 按钮控制。用于演示如何使用 HAL 接口配置 GPIO 并通过GPIO输入输出实现简单的 LED 按钮控制功能。
+本项目基于 STM32F103 系列 MCU 和 STM32 HAL 库，演示了通过软件 I2C 控制 OLED 屏幕的显示。
+主程序在 OLED 上输出字符串，并使用 STM32CubeMX 生成的 CMake 构建配置。
 
 ## 主要功能
-- 配置 GPIO 输出引脚驱动 LED
-- 配置 GPIO 输入引脚获取按钮通断
-- 结构清晰，便于移植到不同 MCU 平台
+- 初始化并使用 STM32 HAL 驱动 STM32F103 MCU
+- 软件 I2C 方式驱动 OLED 显示屏（PB8=SCL，PB9=SDA）
+- OLED 清屏、显示字符串、显示数字、显示十六进制/二进制数
+- 使用 STM32CubeMX 生成的 Cube HAL 驱动代码与自定义 OLED 模块组合
 
-## 硬件要求
-- 一块支持 HAL 的微控制器开发板（如 STM32），此项目使用 STM32F103C8T6
-- PC13最小系统开发板板载LED
-- 按钮开关
+## 关键文件
+- `CMakeLists.txt`：项目根 CMake 构建脚本
+- `CMakePresets.json`：配置和构建预设，支持 `Debug` 和 `Release`
+- `config.ioc`：STM32CubeMX 项目配置
+- `Core/Src/main.c`：主程序入口
+- `Core/Src/OLED.c`：OLED 控制逻辑与软件 I2C 实现
+- `Core/Inc/OLED.h`：OLED 功能接口声明
+- `Core/Inc/OLED_Font.h`：OLED 字库数据
+- `cmake/user_sources.cmake`：自定义源文件和 include 路径注册
+- `Drivers/`：STM32 HAL 库源文件和 CMSIS 头文件
 
-## 软件依赖
-- STM32CubeMX
-- HAL 库（对应目标芯片的官方 HAL 或兼容实现）
-- 常见交叉编译工具链（如 arm-none-eabi-gcc）
-- 固件烧录工具（如 ST-Link）及对应软件（如ST-Link Utility）
+## 构建环境与依赖
+- CMake 3.22 及以上
+- Ninja 构建器
+- ARM GCC 交叉编译器（如 `arm-none-eabi-gcc`）
+- STM32 HAL 库（包含在 `Drivers/` 目录中）
 
-## 构建与运行
-1. 使用对应 MCU 的 HAL 库初始化工程文件
-2. 配置项目的引脚定义，确认 LED 所连接的端口和引脚
-3. 使用工具链编译并生成固件（如 .bin 或 .hex）
-4. 使用烧录工具、将固件写入目标板并重启
+## 构建步骤
+推荐使用 VS Code 的 CMake 工具或命令行：
 
-## 项目目录结构
+```bash
+cd d:/Electronics/HAL_Projects/HAL_2_OLED
+cmake --preset Debug
+cmake --build --preset Debug
+```
 
-| 目录 / 文件       | 说明                         |
-|-------------------|------------------------------|
-| src/              | 源代码                       |
-| inc/              | 头文件                       |
-| hal/              | HAL 层实现或适配代码         |
-| board/            | 板级配置（BSP）              |
-| CMakeLists.txt    | CMake 构建配置文件           |
-| config.ioc        | STM32CubeMX 配置文件         |
+## 运行与下载
+1. 生成固件之后，使用 ST-Link 或其他支持的下载工具烧录生成的 ELF/HEX/BIN 文件到目标板。
+2. 重新上电后，OLED 屏幕应显示主程序中指定的字符串。
 
+## 硬件说明
+- 目标 MCU：STM32F103 系列
+- OLED 使用软件 I2C 模拟，默认引脚：
+  - `PB8`：SCL
+  - `PB9`：SDA
 
 ## 许可
-本仓库采用 MIT License
-
-## 作者
-项目维护者：Sun Yi
-
-## 贡献
-欢迎提交 issue 或 pull request，用于修复 bug 或改进示例。
+MIT License
