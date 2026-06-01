@@ -74,7 +74,7 @@ int main(void)
   HAL_Init();
 
   /* USER CODE BEGIN Init */
-  OLED_Init();
+  
   /* USER CODE END Init */
 
   /* Configure the system clock */
@@ -87,6 +87,7 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+  OLED_Init();
   OLED_Clear();
   /* USER CODE END 2 */
 
