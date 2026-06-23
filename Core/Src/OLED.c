@@ -289,7 +289,7 @@ void OLED_ShowFloat(uint8_t Line, uint8_t Column, float Number, uint8_t DeciLeng
 	}
 	
 	/* 四舍五入小数部分 */
-	for (i = 0; i < Length; i++)
+	for (i = 0; i < DeciLength; i++)
 	{
 		DecimalValue *= 10;
 	}
@@ -311,7 +311,7 @@ void OLED_ShowFloat(uint8_t Line, uint8_t Column, float Number, uint8_t DeciLeng
 	OLED_ShowChar(Line, Column + 2, '.');
 	
 	/* 显示小数部分 */
-	OLED_ShowNum(Line, Column + 3, DecPart, Length);
+	OLED_ShowNum(Line, Column + 3, DecPart, DeciLength);
 }
 
 /**
