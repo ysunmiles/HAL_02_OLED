@@ -264,6 +264,57 @@ void OLED_ShowBinNum(uint8_t Line, uint8_t Column, uint32_t Number, uint8_t Leng
 }
 
 /**
+  * @brief  OLED显示浮点数（带小数点）
+  * @param  Line 起始行位置，范围：1~4
+  * @param  Column 起始列位置，范围：1~16
+  * @param  Number 要显示的浮点数
+  * @param  DeciLength 小数部分的显示位数，范围：0~5
+  * @retval 无
+  */
+void OLED_ShowFloat(uint8_t Line, uint8_t Column, float Number, uint8_t DeciLength)
+{
+	uint8_t i;
+	int32_t IntPart;
+	uint32_t DecPart;
+	float DecimalValue;
+	
+	/* 提取整数部分 */
+	IntPart = (int32_t)Number;
+	
+	/* 提取小数部分 */
+	DecimalValue = Number - IntPart;
+	if (DecimalValue < 0)
+	{
+		DecimalValue = -DecimalValue;
+	}
+	
+	/* 四舍五入小数部分 */
+	for (i = 0; i < Length; i++)
+	{
+		DecimalValue *= 10;
+	}
+	DecPart = (uint32_t)(DecimalValue + 0.5);
+	
+	/* 显示符号和整数部分 */
+	if (IntPart >= 0)
+	{
+		OLED_ShowChar(Line, Column, '+');
+		OLED_ShowNum(Line, Column + 1, IntPart, 1);
+	}
+	else
+	{
+		OLED_ShowChar(Line, Column, '-');
+		OLED_ShowNum(Line, Column + 1, -IntPart, 1);
+	}
+	
+	/* 显示小数点 */
+	OLED_ShowChar(Line, Column + 2, '.');
+	
+	/* 显示小数部分 */
+	OLED_ShowNum(Line, Column + 3, DecPart, Length);
+}
+
+/**
   * @brief  OLED初始化
   * @param  无
   * @retval 无

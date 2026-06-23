@@ -96,6 +96,7 @@ int main(void)
   while (1)
   {
       OLED_ShowString(2, 1, "bobo chuchu =3=");
+      OLED_ShowFloat(3, 1, 3.123456, 5);
       HAL_Delay(1000);
 
     /* USER CODE END WHILE */
