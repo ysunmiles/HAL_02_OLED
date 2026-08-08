@@ -44,7 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-uint8_t array[] = {1,3,2,6, 7};
+uint8_t array[] = {9,15,16,99, 71};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -99,6 +99,7 @@ int main(void)
     OLED_ShowString(1, 1, "bobo chuchu =3=");
     OLED_ShowFloat(2, 1, 3.123456, 5);
     OLED_ShowArray(3, 1, array, sizeof(array));
+    OLED_ShowHexArray(4, 1, array, sizeof(array));
 
     HAL_Delay(1000);
 

@@ -318,7 +318,7 @@ void OLED_ShowFloat(uint8_t Line, uint8_t Column, float Number, uint8_t DeciLeng
   * @brief  OLED以十进制显示数组内容
   * @param  Line 起始行位置，范围：1~4
   * @param  Column 起始列位置，范围：1~16
-  * @param  Array 要显示的数组指针
+  * @param  Array 要显示的数组指针，数组元素需为0~99
   * @param  Length 数组长度，范围：1~5
   * @retval 无
   */
@@ -333,6 +333,29 @@ void OLED_ShowArray(uint8_t Line, uint8_t Column, uint8_t *Array, uint8_t Length
 			OLED_ShowChar(Line, Column + i * 3 + 2, ',');
 		}
 	}
+	OLED_ShowChar(Line, Column + Length * 3 - 1, ';');
+}
+
+/**
+  * @brief  OLED以十六进制显示数组内容
+  * @param  Line 起始行位置，范围：1~4
+  * @param  Column 起始列位置，范围：1~16
+  * @param  Array 要显示的数组指针，数组元素需为0x00~0xFF
+  * @param  Length 数组长度，范围：1~5
+  * @retval 无
+  */
+void OLED_ShowHexArray(uint8_t Line, uint8_t Column, uint8_t *Array, uint8_t Length)
+{
+	uint8_t i;
+	for (i = 0; i < Length; i++)
+	{
+		OLED_ShowHexNum(Line, Column + i * 3, Array[i], 2);
+		if (i < Length - 1)
+		{
+			OLED_ShowChar(Line, Column + i * 3 + 2, ',');
+		}
+	}
+	OLED_ShowChar(Line, Column + Length * 3 - 1, ';');
 }
 
 /**
