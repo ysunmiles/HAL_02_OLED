@@ -315,6 +315,27 @@ void OLED_ShowFloat(uint8_t Line, uint8_t Column, float Number, uint8_t DeciLeng
 }
 
 /**
+  * @brief  OLED以十进制显示数组内容
+  * @param  Line 起始行位置，范围：1~4
+  * @param  Column 起始列位置，范围：1~16
+  * @param  Array 要显示的数组指针
+  * @param  Length 数组长度，范围：1~5
+  * @retval 无
+  */
+void OLED_ShowArray(uint8_t Line, uint8_t Column, uint8_t *Array, uint8_t Length)
+{
+	uint8_t i;
+	for (i = 0; i < Length; i++)
+	{
+		OLED_ShowNum(Line, Column + i * 3, Array[i], 2);
+		if (i < Length - 1)
+		{
+			OLED_ShowChar(Line, Column + i * 3 + 2, ',');
+		}
+	}
+}
+
+/**
   * @brief  OLED初始化
   * @param  无
   * @retval 无
@@ -370,3 +391,4 @@ void OLED_Init(void)
 		
 	OLED_Clear();				//OLED清屏
 }
+

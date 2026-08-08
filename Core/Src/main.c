@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "OLED.h"
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,7 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint8_t array[] = {1,3,2,6, 7};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -95,9 +96,11 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-      OLED_ShowString(2, 1, "bobo chuchu =3=");
-      OLED_ShowFloat(3, 1, 3.123456, 5);
-      HAL_Delay(1000);
+    OLED_ShowString(1, 1, "bobo chuchu =3=");
+    OLED_ShowFloat(2, 1, 3.123456, 5);
+    OLED_ShowArray(3, 1, array, sizeof(array));
+
+    HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
