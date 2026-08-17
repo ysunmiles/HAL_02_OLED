@@ -89,7 +89,6 @@ int main(void)
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
   OLED_Init();
-  OLED_Clear();
   /* USER CODE END 2 */
 
   /* Infinite loop */
