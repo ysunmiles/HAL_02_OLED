@@ -1,9 +1,10 @@
 #include "OLED_Font.h"
 #include "stm32f1xx_hal.h"
+#include "main.h"
 
 /*引脚配置（使用 HAL）*/
-#define OLED_W_SCL(x)    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, (x) ? GPIO_PIN_SET : GPIO_PIN_RESET)
-#define OLED_W_SDA(x)    HAL_GPIO_WritePin(GPIOB, GPIO_PIN_9, (x) ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define OLED_W_SCL(x)    HAL_GPIO_WritePin(OLED_SCL_GPIO_Port, OLED_SCL_Pin, (x) ? GPIO_PIN_SET : GPIO_PIN_RESET)
+#define OLED_W_SDA(x)    HAL_GPIO_WritePin(OLED_SDA_GPIO_Port, OLED_SDA_Pin, (x) ? GPIO_PIN_SET : GPIO_PIN_RESET)
 
 /*引脚初始化（使用 HAL）*/
 void OLED_I2C_Init(void)
